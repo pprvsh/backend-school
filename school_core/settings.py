@@ -24,14 +24,42 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Third-party
+    "corsheaders",
+    "rest_framework",
     # Local apps
     "admissions",
     "faculty",
     "notices",
 ]
 
+# =========================
+# Django REST Framework
+# =========================
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": (
+        "rest_framework.pagination.PageNumberPagination"
+    ),
+    "PAGE_SIZE": 10,
+}
+
+# =========================
+# CORS
+# =========================
+
+# Allows all origins in development.
+# In production, replace with CORS_ALLOWED_ORIGINS list.
+CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "https://yourfrontenddomain.com",
+# ]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # Must be before CommonMiddleware
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
