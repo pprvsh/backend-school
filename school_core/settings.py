@@ -52,10 +52,9 @@ REST_FRAMEWORK = {
 # In production, replace with CORS_ALLOWED_ORIGINS list.
 CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "https://yourfrontenddomain.com",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

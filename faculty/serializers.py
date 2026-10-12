@@ -14,6 +14,11 @@ class DepartmentSerializer(serializers.ModelSerializer):
 
 class FacultySerializer(serializers.ModelSerializer):
     department = DepartmentSerializer(read_only=True)
+    department_id = serializers.PrimaryKeyRelatedField(
+        queryset=Department.objects.all(),
+        source="department",
+        write_only=True,
+    )
 
     class Meta:
         model = Faculty
@@ -23,6 +28,7 @@ class FacultySerializer(serializers.ModelSerializer):
             "email",
             "phone",
             "department",
+            "department_id",
             "is_active",
             "created_at",
         ]
