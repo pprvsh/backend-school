@@ -12,9 +12,9 @@ class Department(models.Model):
 
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254)
-    phone = models.CharField(max_length=20, blank=True)
+    name = models.CharField(max_length=15)
+    email = models.EmailField(max_length=100)
+    phone = models.CharField(max_length=15, blank=True)
     department = models.ForeignKey(
         Department,
         on_delete=models.CASCADE,

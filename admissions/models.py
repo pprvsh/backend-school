@@ -9,21 +9,21 @@ class AdmissionInquiry(models.Model):
         RESOLVED = "resolved", "Resolved"
 
     parent_name = models.CharField(
-        max_length=100,
+        max_length=15,
     )
 
     email = models.EmailField()
 
     phone = models.CharField(
-        max_length=20,
+        max_length=10,
     )
 
     student_grade = models.CharField(
-        max_length=20,
+        max_length=10,
     )
 
     status = models.CharField(
-        max_length=20,
+        max_length=10,
         choices=Status.choices,
         default=Status.PENDING,
     )
