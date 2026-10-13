@@ -1,6 +1,6 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
+from users.permission import AdmissionsPermission
 from .serializers import AdmissionInquirySerializer
 from .selectors import get_all_admission_inquiries
 from .services import process_admission_inquiry
@@ -8,6 +8,7 @@ from .services import process_admission_inquiry
 
 class AdmissionInquiryViewSet(viewsets.ModelViewSet):
     serializer_class = AdmissionInquirySerializer
+    permission_classes = [AdmissionsPermission]
 
     def get_queryset(self):
         return get_all_admission_inquiries()
@@ -23,4 +24,4 @@ class AdmissionInquiryViewSet(viewsets.ModelViewSet):
         return Response(
             output_serializer.data,
             status=status.HTTP_201_CREATED,
-        )
+        )

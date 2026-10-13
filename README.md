@@ -8,12 +8,12 @@ A robust, modular Django REST Framework backend designed for school management o
 
 - [Overview](#-overview)
 - [Tech Stack](#-tech-stack)
-- [Architecture & Design](#-architecture--design)
-- [Recent Updates & Changelog](#-recent-updates--changelog)
+- [Architecture &amp; Design](#-architecture--design)
+- [Recent Updates &amp; Changelog](#-recent-updates--changelog)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation & Setup](#installation--setup)
+  - [Installation &amp; Setup](#installation--setup)
   - [Running the Server](#running-the-server)
 - [API Reference](#-api-reference)
   - [Admissions API](#1-admissions-api)
@@ -59,20 +59,21 @@ This backend adopts the **Service–Selector Pattern** to decouple Django models
 Here is a summary of recent changes and enhancements made to `backend-school`:
 
 1. **Service Layer Introduction**:
+
    - Created `faculty/services.py` with `create_faculty(data)` to handle faculty profile creation.
    - Created `notices/services.py` with `create_notice(data)` to encapsulate notice publication logic.
    - Updated `FacultyViewSet.perform_create` and `NoticeViewSet.perform_create` to delegate directly to their respective service layer functions.
-
 2. **Admissions Service Refactoring**:
+
    - Refactored `admissions/services.py` (`process_admission_inquiry`) to match the model schema (`parent_name`, `email`, `phone`, `student_grade`).
-
 3. **Faculty Serializer Improvements**:
+
    - Added write-only `department_id` (`PrimaryKeyRelatedField`) to `FacultySerializer` alongside read-only nested `DepartmentSerializer`. This allows clients to submit department IDs cleanly without sacrificing detailed serialized output.
-
 4. **Notices Selectors Cleanup**:
-   - Cleaned up redundant function definitions in `notices/selectors.py` and standardized high-priority queries using `Notice.PriorityLevel.HIGH`.
 
+   - Cleaned up redundant function definitions in `notices/selectors.py` and standardized high-priority queries using `Notice.PriorityLevel.HIGH`.
 5. **Environment & Security**:
+
    - Added `.env.example` providing standard configuration templates for `SECRET_KEY`, `DEBUG`, and `ALLOWED_HOSTS`.
    - Updated CORS settings in `school_core/settings.py` allowing frontend connectivity (e.g. `http://localhost:3000`).
 
@@ -124,12 +125,13 @@ backend-school/
 ### Installation & Setup
 
 1. **Clone the repository**:
+
    ```bash
    git clone <repository-url>
    cd backend-school
    ```
-
 2. **Create and activate a virtual environment**:
+
    - On Windows (PowerShell):
      ```powershell
      python -m venv .venv
@@ -140,30 +142,32 @@ backend-school/
      python3 -m venv .venv
      source .venv/bin/activate
      ```
-
 3. **Install dependencies**:
+
    ```bash
    pip install -r requirements.txt
    ```
-
 4. **Configure environment variables**:
    Create a `.env` file from the example template:
+
    ```bash
    cp .env.example .env
    ```
+
    Edit `.env` as needed:
+
    ```env
    SECRET_KEY=your-secure-secret-key-here
    DEBUG=True
    ALLOWED_HOSTS=127.0.0.1,localhost
    ```
-
 5. **Apply database migrations**:
+
    ```bash
    python manage.py migrate
    ```
-
 6. **Create an administrative superuser**:
+
    ```bash
    python manage.py createsuperuser
    ```
@@ -171,11 +175,12 @@ backend-school/
 ### Running the Server
 
 Start the Django development server:
+
 ```bash
 python manage.py runserver
 ```
 
-The server will be available at: `http://127.0.0.1:8000/`  
+The server will be available at: `http://127.0.0.1:8000/`
 The Django Admin panel is accessible at: `http://127.0.0.1:8000/admin/`
 
 ---
@@ -195,6 +200,7 @@ All list endpoints include page pagination with default page size of `10`.
 - **Delete Inquiry**: `DELETE /api/admissions/{id}/`
 
 #### Create Admission Inquiry Payload
+
 ```json
 {
   "parent_name": "Jane Doe",
@@ -213,6 +219,7 @@ All list endpoints include page pagination with default page size of `10`.
 - **Delete Faculty**: `DELETE /api/faculty/{id}/`
 
 #### Create Faculty Payload
+
 ```json
 {
   "name": "Dr. Sarah Connor",
@@ -232,6 +239,7 @@ All list endpoints include page pagination with default page size of `10`.
 - **Delete Notice**: `DELETE /api/notices/{id}/`
 
 #### Create Notice Payload
+
 ```json
 {
   "title": "Annual Sports Day 2026",
@@ -242,7 +250,7 @@ All list endpoints include page pagination with default page size of `10`.
 }
 ```
 
-**Notice Categories**: `academic`, `event`, `general`, `urgent`  
+**Notice Categories**: `academic`, `event`, `general`, `urgent`
 **Priority Levels**: `1` (Low), `2` (Medium), `3` (High)
 
 ---
@@ -252,7 +260,7 @@ All list endpoints include page pagination with default page size of `10`.
 To push your local changes to the remote repository, execute the following commands in your terminal:
 
 ```bash
-# 1. Review status
+c	# 1. Review status
 git status
 
 # 2. Stage updated files and the new README
@@ -262,5 +270,5 @@ git add README.md .env.example admissions/ faculty/ notices/ school_core/ requir
 git commit -m "feat: add service layer architecture, env configuration, and comprehensive README"
 
 # 4. Push to remote
-git push origin main
+git push origin mainS
 ```
