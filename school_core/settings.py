@@ -74,9 +74,10 @@ CORS_ALLOWED_ORIGINS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # Must be before CommonMiddleware
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -158,3 +159,27 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+
+# Celery configuration
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "Asia/Kathmandu"
+
+# Development email configuration
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
