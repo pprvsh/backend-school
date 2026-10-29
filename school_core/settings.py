@@ -110,8 +110,13 @@ WSGI_APPLICATION = "school_core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB", default="school_db"),
+        "USER": env("POSTGRES_USER", default="school_user"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST", default="db"),
+        "PORT": env("POSTGRES_PORT", default="5432"),
+        "CONN_MAX_AGE": 60,
     }
 }
 
@@ -165,11 +170,19 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # Celery configuration
-CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
-CELERY_TASK_SERIALIZER = "json"
-CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_RESULT_SERIALIZER = "json"
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+
 CELERY_TIMEZONE = "Asia/Kathmandu"
+CELERY_BROKER_URL = env(
+    "CELERY_BROKER_URL",
+    default="redis://redis:6379/0",
+)
+
+CELERY_RESULT_BACKEND = env(
+    "CELERY_RESULT_BACKEND",
+    default="redis://redis:6379/1",
+)
 
 # Development email configuration
 
@@ -182,4 +195,10 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
