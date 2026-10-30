@@ -38,6 +38,6 @@ RUN SECRET_KEY="build-only-placeholder-not-for-production" \
 
 USER django
 
-EXPOSE 8000
+EXPOSE 7000
 
-CMD ["gunicorn", "school_core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2", "--access-logfile", "-", "--error-logfile", "-"]
+CMD ["gunicorn", "school_core.wsgi:application", "--bind", "0.0.0.0:7000", "--workers", "2", "--access-logfile", "-", "--error-logfile", "-"]
